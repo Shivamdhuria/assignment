@@ -37,12 +37,17 @@ android {
 
 dependencies {
 
-
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
 
     implementation(Google.material)
+
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.retrofitConvertor)
+
+    implementation(OKhttp.okHttpInterceptor)
+    implementation(OKhttp.okHttp)
 
     implementation(Hilt.android)
     kapt(Hilt.compiler)
