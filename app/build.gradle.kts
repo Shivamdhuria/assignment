@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -38,9 +40,11 @@ dependencies {
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
-    implementation(AndroidX.lifecycleVmKtx)
+//    implementation(AndroidX.lifecycleVmKtx)
+//    implementation(AndroidX.lifecycleRuntime)
 
     implementation(Google.material)
+    implementation(View.constraint)
 
     implementation(Retrofit.retrofit)
     implementation(Retrofit.retrofitConvertor)
@@ -50,16 +54,17 @@ dependencies {
 
     implementation(View.navigationKtx)
     implementation(View.navigationFrag)
-    implementation(View.navigationSafeArgs)
+//    implementation(View.navigationSafeArgs)
 
     implementation(Hilt.android)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     kapt(Hilt.compiler)
 
     androidTestImplementation(Junit.junit4)
-    androidTestImplementation(AndroidXTest.runner)
-    androidTestImplementation(AndroidXTest.espressoCore)
-    androidTestImplementation(AndroidXTest.rules)
-    androidTestImplementation(AndroidXTest.junitExt)
-    androidTestImplementation(HiltTest.hiltAndroidTesting)
-    kaptAndroidTest(Hilt.compiler)
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+//    androidTestImplementation(HiltTest.hiltAndroidTesting)
+//    kaptAndroidTest(Hilt.compiler)
 }

@@ -4,5 +4,8 @@ object View {
 
     const val navigationFrag = "androidx.navigation:navigation-fragment-ktx:$navVersion"
     const val navigationKtx = "androidx.navigation:navigation-ui-ktx:$navVersion"
+
     const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
+
+    const val constraint = "androidx.constraintlayout:constraintlayout:2.1.0"
 }
