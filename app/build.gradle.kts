@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -37,6 +35,7 @@ android {
 
 dependencies {
 
+
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
@@ -47,7 +46,11 @@ dependencies {
     implementation(Retrofit.retrofitConvertor)
 
     implementation(OKhttp.okHttpInterceptor)
-    implementation(OKhttp.okHttp)
+    implementation(OKhttp.okHttpInterceptor)
+
+    implementation(View.navigationKtx)
+    implementation(View.navigationFrag)
+    implementation(View.navigationSafeArgs)
 
     implementation(Hilt.android)
     kapt(Hilt.compiler)
