@@ -56,6 +56,8 @@ dependencies {
     implementation(View.navigationFrag)
 //    implementation(View.navigationSafeArgs)
 
+    implementation(Lottie.lottie)
+
     implementation(Hilt.android)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
