@@ -1,6 +1,9 @@
 package com.example.assignment.network.model
 
-data class Source(
+import androidx.annotation.Keep
+
+@Keep
+data class SourceDto(
     val id: String,
     val name: String
 )

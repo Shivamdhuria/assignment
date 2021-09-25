@@ -1,10 +1,10 @@
 package com.example.assignment.ui.home
 
 import android.util.Log
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.assignment.domain.model.Article
 import com.example.assignment.interactors.GetNewsList
+import com.example.assignment.network.model.ArticleDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,11 +20,16 @@ constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private val _snackbar = MutableLiveData<String?>()
+
+    val _articles: MutableLiveData<List<Article>> = MutableLiveData(ArrayList())
+    val articles: LiveData<List<Article>> = _articles
+
     init {
         Log.e("viewmodel", "intiialted")
         viewModelScope.launch {
             getNewsList.execute(apiKey).collect {
-                Log.e("viewmodel", it.toString())
+               _articles.value = it
             }
         }
     }

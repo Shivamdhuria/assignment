@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_dog.xml" value="0.20989583333333334" />
       </map>
     </option>
   </component>

@@ -1,6 +1,6 @@
 package com.example.assignment.network
 
-import com.example.assignment.network.model.NewsApiResponse
+import com.example.assignment.network.model.NewsApiResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,5 +10,5 @@ interface RetrofitService {
     suspend fun getNews(
         @Query("apiKey") apiKey: String,
         @Query("country") country: String,
-    ): NewsApiResponse
+    ): NewsApiResponseDto
 }

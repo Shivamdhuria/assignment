@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
+    id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
 }
@@ -58,6 +59,7 @@ dependencies {
 
     implementation(Lottie.lottie)
     implementation(Glide.glide)
+    kapt(Glide.compiler)
 
     implementation(Hilt.android)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
