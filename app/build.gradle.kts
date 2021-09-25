@@ -57,6 +57,7 @@ dependencies {
 //    implementation(View.navigationSafeArgs)
 
     implementation(Lottie.lottie)
+    implementation(Glide.glide)
 
     implementation(Hilt.android)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
