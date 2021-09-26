@@ -59,7 +59,6 @@ object NetworkModule {
     }
 
   //Authentications Token for newsApi. Hardcoding it for now but will have to removed.
-
     @Singleton
     @Provides
     @Named("api_key")

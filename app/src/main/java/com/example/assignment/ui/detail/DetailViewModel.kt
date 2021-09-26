@@ -24,8 +24,8 @@ constructor(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     private val _error: MutableLiveData<Error> = MutableLiveData(null)
 
-    private val _likes = MutableLiveData<String>("-___")
-    private val _comments = MutableLiveData<String>("-___")
+    private val _likes = MutableLiveData<String>("-")
+    private val _comments = MutableLiveData<String>("-")
 
     internal val likes: LiveData<String> = _likes
     internal val comments: LiveData<String> = _comments

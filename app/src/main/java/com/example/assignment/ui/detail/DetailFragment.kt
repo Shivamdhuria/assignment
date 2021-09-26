@@ -1,7 +1,6 @@
 package com.example.assignment.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +11,6 @@ import com.example.assignment.ui.util.ImageLoader
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.detail_fragment.*
-import kotlinx.android.synthetic.main.item_article.*
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.detail_fragment) {
@@ -40,16 +38,17 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
 
     private fun observeViewModel() {
         viewModel.likes.observe(viewLifecycleOwner) {
+            // Add plurals and localization
             textview_likes.text = "$it likes"
 
         }
         viewModel.comments.observe(viewLifecycleOwner) {
+            //Add plurals and localization
             textview_comments.text = "$it Comments"
         }
     }
 
     private fun setUpLayout(article: Article) {
-        Log.e("article", article.toString())
         article.urlToImage?.let { ImageLoader.loadImage(requireContext(), it, image_dog_detail) } ?: kotlin.run {
             ImageLoader.loadImage(requireContext(), R.drawable.placeholder, image_dog_detail)
         }

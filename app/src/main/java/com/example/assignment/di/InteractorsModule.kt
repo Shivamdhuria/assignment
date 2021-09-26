@@ -22,14 +22,14 @@ object InteractorsModule {
 
     @ViewModelScoped
     @Provides
-    fun provideGetLikes(recipeService: NewsApiService): GetLikes {
-        return GetLikes(retrofitService = recipeService,)
+    fun provideGetLikes(newsService: NewsApiService): GetLikes {
+        return GetLikes(retrofitService = newsService,)
     }
 
     @ViewModelScoped
     @Provides
-    fun provideGetComments(recipeService: NewsApiService): GetComments {
-        return GetComments(retrofitService = recipeService)
+    fun provideGetComments(newsService: NewsApiService): GetComments {
+        return GetComments(retrofitService = newsService)
     }
 }
 

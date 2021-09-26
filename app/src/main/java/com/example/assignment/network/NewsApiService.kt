@@ -19,11 +19,7 @@ interface NewsApiService {
     @GET
     suspend fun getLikes(@Url url: String): LikesDto
 
+    //Bypassing base url
     @GET
     suspend fun getComments(@Url url: String): CommentsDto
-//    @GET("/{articleId}")
-//    suspend fun getComments(
-//        @Query("apiKey") apiKey: String,
-//        @Query("country") country: String,
-//    ): NewsApiResponseDto
 }
