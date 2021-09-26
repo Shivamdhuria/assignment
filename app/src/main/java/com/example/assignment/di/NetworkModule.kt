@@ -1,7 +1,7 @@
 package com.example.assignment.di
 
 import com.example.assignment.BuildConfig
-import com.example.assignment.network.RetrofitService
+import com.example.assignment.network.NewsApiService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -19,12 +19,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    const val NEWS_API_BASE_URL = "https://newsapi.org/v2/"
+    private const val NEWS_API_BASE_URL = "https://newsapi.org/v2/"
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient): RetrofitService {
-       return  retrofitConfiguration(client).create(RetrofitService::class.java)
+    fun provideRetrofit(client: OkHttpClient): NewsApiService {
+       return  retrofitConfiguration(client).create(NewsApiService::class.java)
     }
 
     private fun retrofitConfiguration(client: OkHttpClient): Retrofit {

@@ -2,13 +2,12 @@ package com.example.assignment.interactors
 
 import android.util.Log
 import com.example.assignment.domain.model.Article
-import com.example.assignment.network.RetrofitService
-import com.example.assignment.network.model.ArticleDto
+import com.example.assignment.network.NewsApiService
 import com.example.assignment.network.model.toDomainList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetNewsList(private val retrofitService: RetrofitService) {
+class GetNewsList(private val retrofitService: NewsApiService) {
 
     fun execute(apiKey: String): Flow<List<Article>> = flow {
         try {

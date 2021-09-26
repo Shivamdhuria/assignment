@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.assignment.R
 import com.example.assignment.domain.model.Article
 import com.example.assignment.ui.util.ImageLoader
 import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.detail_fragment.*
 import kotlinx.android.synthetic.main.item_article.*
 
+@AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.detail_fragment) {
 
-    private lateinit var viewModel: DetailViewModel
-
+    private val viewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +33,21 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
         super.onViewCreated(view, savedInstanceState)
         val article = args.article
         setUpLayout(article)
+        viewModel.loadLikeAndComments(article.url)
+        observeViewModel()
     }
 
-    private fun setUpLayout(article: Article){
+    private fun observeViewModel() {
+        viewModel.likes.observe(viewLifecycleOwner) {
+            textview_likes.text = "$it likes"
+
+        }
+        viewModel.comments.observe(viewLifecycleOwner) {
+            textview_comments.text = "$it Comments"
+        }
+    }
+
+    private fun setUpLayout(article: Article) {
         Log.e("article", article.toString())
         article.urlToImage?.let { ImageLoader.loadImage(requireContext(), it, image_dog_detail) } ?: kotlin.run {
             ImageLoader.loadImage(requireContext(), R.drawable.placeholder, image_dog_detail)

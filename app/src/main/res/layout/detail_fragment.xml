@@ -39,16 +39,34 @@
                 android:id="@+id/textview_dog_breed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
                 android:layout_marginTop="20dp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 tools:text="Heading" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_likes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:textAppearance="?attr/textAppearanceCaption"
+                tools:text="5 Likes" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
+                android:textAppearance="?attr/textAppearanceCaption"
+                tools:text="5 Comments" />
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textview_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/text_padding"
                 android:layout_marginTop="20dp"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:textAppearance="?attr/textAppearanceCaption"
                 tools:text="content" />
             <!--            </com.google.android.material.card.MaterialCardView>-->
         </LinearLayout>
