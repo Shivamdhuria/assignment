@@ -14,6 +14,7 @@ fun ArticleDto.mapToDomainModel(): Article {
     for simpler code
      */
     return Article(
+        title = this.title.orEmpty(),
         author = this.author.orEmpty(),
         description = this.description.orEmpty(),
         url = this.url,

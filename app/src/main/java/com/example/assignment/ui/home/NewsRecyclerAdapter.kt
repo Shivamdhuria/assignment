@@ -50,7 +50,7 @@ class NewsRecyclerAdapter(val callback: RecyclerViewClickListener) :
         fun bind(article: Article) {
 
             with(containerView) {
-                ViewCompat.setTransitionName(item_container, article.urlToImage)
+                ViewCompat.setTransitionName(item_container, article.urlToImage.orEmpty())
                 textview_author.text = article.author
                 textview_description.text = article.description
                 article.urlToImage?.let { it1 ->

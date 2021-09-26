@@ -1,28 +1,45 @@
 package com.example.assignment.ui.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.example.assignment.R
+import com.example.assignment.domain.model.Article
+import com.example.assignment.ui.util.ImageLoader
+import com.google.android.material.transition.MaterialContainerTransform
+import kotlinx.android.synthetic.main.detail_fragment.*
+import kotlinx.android.synthetic.main.item_article.*
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(R.layout.detail_fragment) {
 
     private lateinit var viewModel: DetailViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+    private val args: DetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+            isElevationShadowEnabled = true
+        }
+        super.onCreate(savedInstanceState)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val article = args.article
+        setUpLayout(article)
     }
 
+    private fun setUpLayout(article: Article){
+        Log.e("article", article.toString())
+        article.urlToImage?.let { ImageLoader.loadImage(requireContext(), it, image_dog_detail) } ?: kotlin.run {
+            ImageLoader.loadImage(requireContext(), R.drawable.placeholder, image_dog_detail)
+        }
+        textview_dog_breed.text = article.title
+        detail_container.transitionName = article.urlToImage
+        textview_content.text = article.content
+    }
 }
