@@ -5,6 +5,7 @@ plugins {
     id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -67,9 +68,17 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     kapt(Hilt.compiler)
 
-    androidTestImplementation(Junit.junit4)
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    // TESTING
+    // (Required) Writing and executing Unit Tests on the JUnit Platform
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.0")
+
+    // Mock web server
+    testImplementation (UnitTest.mock_web_server)
+
+//    androidTestImplementation(Junit.junit4)
+//    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+//    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 //    androidTestImplementation(HiltTest.hiltAndroidTesting)
 //    kaptAndroidTest(Hilt.compiler)
 }

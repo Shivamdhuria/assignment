@@ -9,6 +9,7 @@ buildscript {
         classpath(Build.kotlinGradlePlugin)
         classpath(Build.hiltAndroid)
         classpath(View.navigationSafeArgs)
+        classpath("de.mannodermaus.gradle.plugins:android-junit5:1.8.0.0")
     }
 }
 
