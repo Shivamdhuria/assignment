@@ -1,26 +1,26 @@
-package com.example.assignment.interactors
+package com.example.assignment.interactors.home
 
-import android.util.Log
 import com.example.assignment.domain.model.Article
-import com.example.assignment.domain.model.StateWrapper
+import com.example.assignment.domain.model.data.DataState
 import com.example.assignment.network.NewsApiService
 import com.example.assignment.network.handleUseCaseException
 import com.example.assignment.network.model.toDomainList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetNewsList(private val retrofitService: NewsApiService) {
+class GetNewsList(private val newsApiService: NewsApiService) {
 
     companion object {
         const val DEFAULT_COUNTRY = "us"
     }
 
-    fun execute(apiKey: String): Flow<StateWrapper> = flow {
-        emit(StateWrapper.Loading(true))
+    fun execute(apiKey: String): Flow<DataState<List<Article>>> = flow {
+        emit(DataState.loading())
+
         try {
-            val newApiResponse = retrofitService.getNews(apiKey, DEFAULT_COUNTRY)
+            val newApiResponse = newsApiService.getNews(apiKey, DEFAULT_COUNTRY)
             val articles = newApiResponse.articles.toDomainList()
-            emit(StateWrapper.Success(articles))
+            emit(DataState.success(articles))
 
         } catch (e: Exception) {
             emit(handleUseCaseException(e))

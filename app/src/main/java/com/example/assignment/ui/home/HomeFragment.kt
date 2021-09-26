@@ -2,7 +2,8 @@ package com.example.assignment.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,11 +13,11 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.assignment.R
 import com.example.assignment.domain.model.Article
-import com.example.assignment.domain.model.StateWrapper
+import com.example.assignment.domain.model.data.Error.GenericError
+import com.example.assignment.domain.model.data.Error.NetworkError
 import com.example.assignment.ui.util.showToast
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialElevationScale
-import com.google.android.material.transition.MaterialFadeThrough
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -25,13 +26,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
 
     private val viewModel: HomeViewModel by viewModels()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { NewsRecyclerAdapter(this) }
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enterTransition = MaterialFadeThrough().apply {
-//            duration = resources.getInteger(R.integer.motion_duration_large).toLong()
-//        }
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,25 +45,25 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
 
     @Suppress("UNCHECKED_CAST")
     private fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            button_retry.visibility = GONE
+            toggleLoading(it)
+        }
+        viewModel.articles.observe(viewLifecycleOwner) {
+            showSuccess(it)
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
             when (it) {
-                is StateWrapper.Loading -> showLoading()
-                is StateWrapper.Success<*> -> showSuccess(it)
-                is StateWrapper.NetworkError -> showErrorLayout(R.string.error_internet)
-                is StateWrapper.GenericError -> showErrorLayout(R.string.something_went_wrong)
+                NetworkError -> showErrorLayout(R.string.error_internet)
+                GenericError -> showErrorLayout(R.string.something_went_wrong)
             }
         }
     }
 
-    private fun showSuccess(it: StateWrapper.Success<*>) {
+    private fun showSuccess(it: List<Article>) {
         button_retry.visibility = GONE
-        progressBar.visibility = GONE
-        adapter.submitList(it.value as List<Article>)
-    }
-
-    private fun showLoading() {
-        toggleLoading(true)
-        button_retry.visibility = GONE
+        recycler.visibility = VISIBLE
+        adapter.submitList(it)
     }
 
     private fun toggleLoading(isLoading: Boolean) {
@@ -79,7 +73,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
     private fun showErrorLayout(errorMessage: Int) {
         showToast(errorMessage)
         button_retry.visibility = VISIBLE
-        toggleLoading(false)
     }
 
     override fun onItemClicked(view: View, article: Article) {

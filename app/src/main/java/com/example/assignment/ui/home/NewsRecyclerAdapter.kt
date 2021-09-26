@@ -18,7 +18,7 @@ class NewsRecyclerAdapter(val callback: RecyclerViewClickListener) :
     ListAdapter<Article, NewsRecyclerAdapter.ArticleViewHolder>(UserDataAdapterListDiff()) {
 
     interface RecyclerViewClickListener {
-        fun onItemClicked(view: View, Article: Article)
+        fun onItemClicked(view: View, article: Article)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {

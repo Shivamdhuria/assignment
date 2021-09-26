@@ -1,14 +1,15 @@
 package com.example.assignment.network
 
-import com.example.assignment.domain.model.StateWrapper
-import retrofit2.HttpException
+import com.example.assignment.domain.model.Article
+import com.example.assignment.domain.model.data.DataState
+import com.example.assignment.domain.model.data.Error
+import com.example.assignment.domain.model.data.Error.GenericError
 import java.io.IOException
 
-fun handleUseCaseException(e: Throwable): StateWrapper {
+fun handleUseCaseException(e: Throwable): DataState<List<Article>> {
     e.printStackTrace()
     return when (e) {
-        is IOException -> StateWrapper.NetworkError
-        is HttpException -> StateWrapper.GenericError(e.code())
-        else -> StateWrapper.GenericError()
+        is IOException -> DataState.error(Error.NetworkError)
+        else -> DataState.error(GenericError)
     }
 }
