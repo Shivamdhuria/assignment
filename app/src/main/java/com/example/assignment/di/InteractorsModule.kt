@@ -1,6 +1,7 @@
 package com.example.assignment.di
 
-import com.example.assignment.interactors.GetLikeAndComments
+import com.example.assignment.interactors.detail.GetComments
+import com.example.assignment.interactors.detail.GetLikes
 import com.example.assignment.interactors.home.GetNewsList
 import com.example.assignment.network.NewsApiService
 import dagger.Module
@@ -21,13 +22,15 @@ object InteractorsModule {
 
     @ViewModelScoped
     @Provides
-    fun provideGetLikesAndComments(recipeService: NewsApiService): GetLikeAndComments {
-        return GetLikeAndComments(
-            retrofitService = recipeService,
-        )
+    fun provideGetLikes(recipeService: NewsApiService): GetLikes {
+        return GetLikes(retrofitService = recipeService,)
     }
 
-
+    @ViewModelScoped
+    @Provides
+    fun provideGetComments(recipeService: NewsApiService): GetComments {
+        return GetComments(retrofitService = recipeService)
+    }
 }
 
 

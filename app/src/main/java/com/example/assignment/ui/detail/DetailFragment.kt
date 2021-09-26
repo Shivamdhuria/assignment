@@ -33,7 +33,8 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
         super.onViewCreated(view, savedInstanceState)
         val article = args.article
         setUpLayout(article)
-        viewModel.loadLikeAndComments(article.url)
+        viewModel.getComments(article.url)
+        viewModel.getLikes(article.url)
         observeViewModel()
     }
 

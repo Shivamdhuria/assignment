@@ -7,6 +7,7 @@ import com.example.assignment.network.handleUseCaseException
 import com.example.assignment.network.model.toDomainList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.catch
 
 class GetNewsList(private val newsApiService: NewsApiService) {
 
@@ -17,13 +18,12 @@ class GetNewsList(private val newsApiService: NewsApiService) {
     fun execute(apiKey: String): Flow<DataState<List<Article>>> = flow {
         emit(DataState.loading())
 
-        try {
-            val newApiResponse = newsApiService.getNews(apiKey, DEFAULT_COUNTRY)
-            val articles = newApiResponse.articles.toDomainList()
-            emit(DataState.success(articles))
+        val newApiResponse = newsApiService.getNews(apiKey, DEFAULT_COUNTRY)
+        val articles = newApiResponse.articles.toDomainList()
 
-        } catch (e: Exception) {
-            emit(handleUseCaseException(e))
-        }
+        emit(DataState.success(articles))
+
+    }.catch { e ->
+        emit(handleUseCaseException(e))
     }
 }

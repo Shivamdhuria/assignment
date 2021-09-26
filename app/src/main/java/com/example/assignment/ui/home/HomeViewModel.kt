@@ -2,12 +2,10 @@ package com.example.assignment.ui.home
 
 import androidx.lifecycle.*
 import com.example.assignment.domain.model.Article
-import com.example.assignment.domain.model.StateWrapper
 import com.example.assignment.domain.model.data.Error
 import com.example.assignment.interactors.home.GetNewsList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
