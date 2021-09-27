@@ -8,7 +8,8 @@ buildscript {
         classpath(Build.androidBuildTools)
         classpath(Build.kotlinGradlePlugin)
         classpath(Build.hiltAndroid)
-        classpath(View.navigationSafeArgs)
+        classpath(Navigation.navigationSafeArgs)
+        classpath(Build.jUnit)
     }
 }
 

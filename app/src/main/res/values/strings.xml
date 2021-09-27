@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">assignment</string>
+    <string name="retry">Retry</string>
+    <string name="error_internet">Please check your internet Connection</string>
+    <string name="something_went_wrong">Something went Wrong</string>
+    <string name="loading">loading...</string>
 </resources>

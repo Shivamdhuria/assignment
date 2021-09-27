@@ -2,8 +2,10 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
+    id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -37,14 +39,11 @@ android {
 
 dependencies {
 
-
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
-//    implementation(AndroidX.lifecycleVmKtx)
-//    implementation(AndroidX.lifecycleRuntime)
-
-    implementation(Google.material)
-    implementation(View.constraint)
+    implementation(AndroidX.constraint)
+    implementation(AndroidX.lifecycleLiveData)
+    implementation(AndroidX.lifecycleViewModel)
 
     implementation(Retrofit.retrofit)
     implementation(Retrofit.retrofitConvertor)
@@ -52,21 +51,18 @@ dependencies {
     implementation(OKhttp.okHttpInterceptor)
     implementation(OKhttp.okHttpInterceptor)
 
-    implementation(View.navigationKtx)
-    implementation(View.navigationFrag)
-//    implementation(View.navigationSafeArgs)
+    implementation(Navigation.navigationKtx)
+    implementation(Navigation.navigationFrag)
 
+    implementation(Google.material)
     implementation(Lottie.lottie)
+    implementation(Glide.glide)
+    kapt(Glide.compiler)
 
     implementation(Hilt.android)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     kapt(Hilt.compiler)
 
-    androidTestImplementation(Junit.junit4)
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-//    androidTestImplementation(HiltTest.hiltAndroidTesting)
-//    kaptAndroidTest(Hilt.compiler)
+    testImplementation(UnitTest.jupiter_api)
+    testRuntimeOnly(UnitTest.jupiter_engine)
+    testImplementation (UnitTest.mock_web_server)
 }
