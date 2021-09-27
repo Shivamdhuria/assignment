@@ -43,7 +43,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun observeViewModel() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             button_retry.visibility = GONE

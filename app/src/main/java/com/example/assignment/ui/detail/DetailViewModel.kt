@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.assignment.domain.model.Article
-import com.example.assignment.domain.model.data.Error
 import com.example.assignment.interactors.detail.GetComments
 import com.example.assignment.interactors.detail.GetLikes
 import dagger.hilt.android.lifecycle.HiltViewModel
