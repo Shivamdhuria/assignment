@@ -66,10 +66,14 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
     }
 
     private fun toggleLoading(isLoading: Boolean) {
+        animation.visibility = GONE
         progressBar.visibility = if (isLoading) VISIBLE else GONE
     }
 
     private fun showErrorLayout(errorMessage: Int) {
+        animation.visibility = View.VISIBLE
+        animation.setAnimation(R.raw.error_dog)
+        animation.playAnimation()
         showToast(errorMessage)
         recycler.visibility = GONE
         button_retry.visibility = VISIBLE
