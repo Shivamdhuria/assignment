@@ -21,40 +21,35 @@ constructor(
     private val getComments: GetComments
 ) : ViewModel() {
 
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val _error: MutableLiveData<Error> = MutableLiveData(null)
-
-    private val _likes = MutableLiveData<String>("-")
-    private val _comments = MutableLiveData<String>("-")
+    private val _isLikesLoading: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isCommentsLoading: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _likes = MutableLiveData<String>("")
+    private val _comments = MutableLiveData<String>("")
 
     internal val likes: LiveData<String> = _likes
     internal val comments: LiveData<String> = _comments
-    val isLoading: LiveData<Boolean> = _isLoading
-    val error: LiveData<Error> = _error
+    val isLikesLoading: LiveData<Boolean> = _isLikesLoading
+    val isCommentsLoading: LiveData<Boolean> = _isCommentsLoading
 
+    //TODO: Handle error case and show retry in UI
     fun getLikes(articleUrl:String) {
         viewModelScope.launch {
             getLikes.execute(articleUrl).collect { it ->
-                _isLoading.value = it.loading
+                _isLikesLoading.value = it.loading
                 it.data?.let {
                     _likes.value = it.toString()
-                }
-                it.error?.let {
-                    _error.value = it
                 }
             }
         }
     }
 
+    //TODO: Handle error case and show retry in UI
     fun getComments(articleUrl:String) {
         viewModelScope.launch {
             getComments.execute(articleUrl).collect { it ->
-                _isLoading.value = it.loading
+                _isCommentsLoading.value = it.loading
                 it.data?.let {
                     _comments.value = it.toString()
-                }
-                it.error?.let {
-                    _error.value = it
                 }
             }
         }

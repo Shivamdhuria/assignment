@@ -39,12 +39,24 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
     private fun observeViewModel() {
         viewModel.likes.observe(viewLifecycleOwner) {
             // Add plurals and localization
-            textview_likes.text = "$it likes"
+            textview_likes.text = "$it Likes"
 
         }
         viewModel.comments.observe(viewLifecycleOwner) {
             //Add plurals and localization
             textview_comments.text = "$it Comments"
+        }
+
+        viewModel.isLikesLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                textview_likes.text = getString(R.string.loading)
+            }
+        }
+
+        viewModel.isCommentsLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                textview_comments.text = getString(R.string.loading)
+            }
         }
     }
 
