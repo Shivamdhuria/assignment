@@ -1,5 +1,5 @@
 # Assignment for Conde Nast
-
+ Built and tested on Android Studio Arctic Fox 20.3.1 | Beta 5
 
 # Main Features
 1. Kotlin
