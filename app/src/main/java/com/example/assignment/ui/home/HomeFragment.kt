@@ -71,6 +71,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
 
     private fun showErrorLayout(errorMessage: Int) {
         showToast(errorMessage)
+        recycler.visibility = GONE
         button_retry.visibility = VISIBLE
     }
 

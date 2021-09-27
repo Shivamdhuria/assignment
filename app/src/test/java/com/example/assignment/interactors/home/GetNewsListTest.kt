@@ -111,7 +111,7 @@ class GetNewsListTest {
         //Check Loading
         assert(flowItems[0].loading)
 
-        //check Generic Error is returned
+        //check Network Error is returned
         val error = flowItems[1].error
         assert(error == Error.NetworkError)
 
