@@ -13,4 +13,6 @@
 1. Single Activity Architecture
 1. Light and Dark theme
 1. Flows
+1. Lottie Animation
+1. JUnit 5 for Unit Testing
 
