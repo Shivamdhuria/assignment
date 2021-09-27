@@ -37,9 +37,7 @@ constructor(
                 it.data?.let {
                     _articles.value = it
                 }
-                it.error?.let {
-                    _error.value = it
-                }
+                _error.value = it.error
             }
         }
     }

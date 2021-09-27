@@ -38,6 +38,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
     private fun setupLayout() {
         recycler.adapter = adapter
         button_retry.visibility = GONE
+        animation.visibility = GONE
         button_retry.setOnClickListener {
             viewModel.getArticles()
         }
@@ -45,27 +46,30 @@ class HomeFragment : Fragment(R.layout.home_fragment), NewsRecyclerAdapter.Recyc
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            button_retry.visibility = GONE
             toggleLoading(it)
         }
         viewModel.articles.observe(viewLifecycleOwner) {
             showSuccess(it)
         }
         viewModel.error.observe(viewLifecycleOwner) {
-            when (it) {
-                NetworkError -> showErrorLayout(R.string.error_internet)
-                GenericError -> showErrorLayout(R.string.something_went_wrong)
+            it?.let {
+                when (it) {
+                    NetworkError -> showErrorLayout(R.string.error_internet)
+                    GenericError -> showErrorLayout(R.string.something_went_wrong)
+                }
             }
         }
     }
 
     private fun showSuccess(it: List<Article>) {
         button_retry.visibility = GONE
+        animation.visibility = GONE
         recycler.visibility = VISIBLE
         adapter.submitList(it)
     }
 
     private fun toggleLoading(isLoading: Boolean) {
+        button_retry.visibility = GONE
         animation.visibility = GONE
         progressBar.visibility = if (isLoading) VISIBLE else GONE
     }
